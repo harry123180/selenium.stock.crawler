@@ -18,29 +18,27 @@ def gethtml(html, list, list2):
     price = soap.find_all('p', class_='prdPrice')
     name = soap.find_all(class_='prdName')
     for x in name:
-        list.append(str(x))
+        list.append(x)
     for i in price:
         list2.append(str(i))
 
 
 def writeinfo(list, list2, f):
-    priz = []
-    print(list2[5])
+    priz = []# None(空的) priz[0] #priz[1] 不存在
     for num in range(len(list)):
         f.write('商品名稱:')
-        f.write(str(list[num]))
+        f.write(str(list[num].text))
         f.write('\n')
         f.write('商品價格:')
         a = list2[num].find('$')
         b = list2[num].find('</b>')
-        priz.append('')
-        #priz[num].append('')
+        priz.append('')# priz的size =1
         for i in range(a, b):
             priz[num] +=list2[num][i]
-        print(priz)
-        # 　print(num, i)
-        # 　print(priz[num])
-        # 　f.write('\n')
+        #print(priz)
+        f.write(str(priz[num]))
+
+        f.write('\n')
 
 
 def main():
